@@ -1,0 +1,62 @@
+{% load static from staticfiles%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Airlines Reservation System</title>
+<meta name="keywords" content="free templates, website templates, CSS, XHTML" />
+<meta name="description" content="Simple Gray - Professional free XHTML/CSS template provided by templatemo.com" />
+<link href="/assets/css/templatemo_style.css" rel="stylesheet" type="text/css" />
+<script src="/assets/js/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="/assets/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<div id="templatemo_header_wrapper">
+<!--  Free Web Templates by TemplateMo.com  -->
+  <div id="templatemo_header">
+    
+   	<div id="site_logo">Airlines Reservation System</div>
+        
+		<div id="templatemo_menu">
+      		<div id="templatemo_menu_left"></div>
+            <ul>
+				{% if request.session.authenticated %}
+				<li><a href="/" id="home_page" class="current">Home</a></li>
+				{% else %}
+                  <li><a href="/" id="home_page" class="current">Home</a></li>
+				{% endif %}  	
+                {% if request.session.user_level_id == 1 %}			
+                    <li><a href="/users/dashboard">Dashboard</a></li>	
+                    <li><a href="/airlines/search" id="login_page">Search</a></li>
+                    <li><a href="/book" id="login_page">My Bookings</a></li>
+					<li><a href="/users/logout" class="last">Logout</a></li>
+                {% else %}
+                    <li><a href="/pages/about" id="about_page" >About Project</a></li>
+                    <li><a href="/airlines/search" id="login_page">Search</a></li>
+                    <li><a href="/users" id="login_page">Login</a></li>
+                    <li><a href="/users/add" id="login_page">Register</a></li>
+                    <li><a href="/pages/contact" id="contact_page">Contact</a></li>
+				{% endif %}
+            </ul>    	
+		</div> <!-- end of menu -->
+    
+    </div>  <!-- end of header -->
+</div> <!-- end of header wrapper -->
+
+
+	{% block content %} {% endblock content %}
+	
+<div id="templatemo_footer_wrapper">
+
+	<div id="templatemo_footer">
+    	
+        
+
+        <div class="cleaner"></div>
+    </div>
+</div>
+</body>
+</html>	

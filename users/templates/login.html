@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="templatemo_content_wrapper">
+	<div id="templatemo_content">
+
+		<div id="column_w530" style="text-align:justify; width:585px;">
+			<div class="header_02" style="border-bottom:1px solid">Login to your account </div>
+			<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+				{% csrf_token %} {% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px; color: #FF0000;">
+					{% for message in messages %}
+					<strong>{{ message }}</strong> {% endfor %}
+				</div>
+				{% endif %}
+				<div class="row">
+					<label for="name">User Name:</label><br />
+					<input id="username" class="input" name="username" type="text" value="" size="30" required/><br />
+				</div>
+				<div class="row">
+					<label for="email">Password</label>:</label><br />
+					<input id="password" class="input" name="password" type="password" value="" size="30" required/><br />
+				</div>
+
+				<button name="submit" type="submit" class="btn-sub">Sign in</button>
+				<input type="hidden" name="act" value="check_login">
+			</form>
+			<div class="cleaner"></div>
+		</div>
+
+		<div class="cleaner"></div>
+	</div>
+	<!-- end of content wrapper -->
+</div>
+<!-- end of content wrapper -->
+{% endblock content %}

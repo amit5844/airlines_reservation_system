@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#user_dob").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<style>
+.form-group {
+	margin-bottom: 10px;
+}
+</style>
+<div id="templatemo_content_wrapper">
+	<div id="templatemo_content">
+
+		<div id="column_w530" style="text-align:justify; width:585px;">
+			<div class="header_02" style="border-bottom:1px solid">User Registration Form </div>
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="Full Name" autofocus="" name="user_name" id="user_name" value="{{userdetails.user_name}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="Login ID" autofocus="" name="user_username" id="user_username" value="{{userdetails.user_username}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<input type="password" class="input" placeholder="Password" autofocus="" name="user_password" id="user_password" value="{{userdetails.user_password}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<input type="password" class="input" placeholder="Confirm Password" autofocus="" name="user_confirm_password" id="user_confirm_password" value="{{userdetails.user_password}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<span class="input">
+						Gender : <input type="radio" class="radio-inline" name="user_gender" value="Male" {% ifequal userdetails.user_gender 'Male' %} checked="checked"{% endifequal %} required> Male &nbsp&nbsp
+						<input type="radio" class="radio-inline" name="user_gender" value="Female" {% ifequal userdetails.user_gender 'Female' %} checked="checked"{% endifequal %} required> Female
+					</span>
+				</div>
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="User Email" autofocus="" name="user_email" id="user_email" value="{{userdetails.user_email}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="User Mobile" autofocus="" name="user_mobile" id="user_mobile" value="{{userdetails.user_mobile}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="User Date of Birth" autofocus="" id="user_dob" name="user_dob" value="{{userdetails.user_dob}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="User Address Line 1" autofocus="" name="user_add1" id="user_date" value="{{userdetails.user_add1}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<input type="text" class="input" placeholder="User Address Line 2" autofocus="" name="user_add2" id="user_add2" value="{{userdetails.user_add2}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<select name="user_city" required class="input" placeholder="Select User" autofocus="" style="height: 35px;"> 
+					<option value="">Please Select</option>
+					{% for city in citylist %}
+					<option value="{{ city.city_id }}" {% ifequal city.city_id userdetails.user_city %} selected="selected"{% endifequal %}>{{city.city_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="col-xs-6 form-group">
+					<select name="user_state" required class="input" placeholder="Select Month" autofocus="" style="height: 35px;" /> 
+					<option value="">Please Select</option>
+					{% for state in statelist %}
+					<option value="{{ state.state_id }}" {% ifequal state.state_id userdetails.user_state %} selected="selected"{% endifequal %}>{{state.state_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="col-xs-6 form-group">
+					<select name="user_country" required class="input" placeholder="Select Month" autofocus=""  style="height: 35px;"/> 
+					<option value="">Please Select</option>
+					{% for country in countrylist %}
+					<option value="{{ country.country_id }}" {% ifequal country.country_id userdetails.user_country %} selected="selected"{% endifequal %}>{{country.country_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<button class="btn-sub" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_user">
+			<input type="hidden" name="avail_image" value="{{userdetails.user_image}}">
+			<input type="hidden" name="user_id" value="{{userdetails.user_id}}">
+		</form>
+		<div class="cleaner"></div>
+	</div>
+
+	<div class="cleaner"></div>
+</div>
+<!-- end of content wrapper -->
+</div>
+{% endblock content %}

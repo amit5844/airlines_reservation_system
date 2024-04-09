@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="templatemo_content_wrapper">
+	<div id="templatemo_content">
+		<div id="column_w530" style="text-align:justify; width:585px;">
+			<div class="header_02" style="border-bottom:1px solid">Airlines Reservation System - Dashbaord</div>
+			<ul class="my-menu">
+					<li><a href="/users/dashboard">Dashboard</a></li>	
+                    <li><a href="/airlines/search" id="login_page">Search</a></li>
+                    <li><a href="/book" id="login_page">My Bookings</a></li>
+					<li><a href="/users/changepassword">Change Password</a></li>
+					<li><a href="/users/logout" class="last">Logout</a></li>
+			</ul>
+			<div class="cleaner"></div>
+		</div>
+		<div class="cleaner"></div>
+	</div>
+	<div class="cleaner"></div>
+</div>
+{% endblock content %}

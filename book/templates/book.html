@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+  $( function() {
+    $( "#product_dob" ).datepicker();
+  } );
+</script>
+<style>
+th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 5px;
+}
+</style>
+<div id="templatemo_content_wrapper">
+		<div id="templatemo_content">
+			<div id="column_w530" style="text-align:justify; width:100%;">
+				<div class="header_02" style="border-bottom:1px solid">Airlines Details - {{route_id}}</div>
+				<table>
+					<tr>
+						<td style="width: 15%"><img src="{{airlines_details.company_image}}" alt="image" style="height:100px; width:100px;" /></td>
+						<td style="width: 85%">
+							<div class="header_04"><a href="#">{{airlines_details.airlines_name}} - {{airlines_details.company_name}}</a></div>
+							<p><b>Airline Number : {{airlines_details.airlines_detailss_no}}</b> 
+								<br>From City : {{airlines_details.city_name}}
+								<br>Fare : {{airlines_details.route_fare}}
+							</p>	
+						</td>
+					</tr>
+				</table>
+				<div class="header_02" style="border-bottom:1px solid">Enter Passengar Details</div>
+				<form method="post">
+					{% csrf_token %}
+					<input type="hidden" name="act" value="">
+					<div style="margin-bottom:15px;">
+						<input type="text" name="passengar_name" id="passengar_name" style="width: 250px;"  class="form-control" placeholder="Passengar Name"> 
+						<input type="text" name="passengar_age" id="passengar_age" style="width: 250px;"  class="form-control" placeholder="Passengar Age"> 
+						<select name="passengar_gender" required class="form-control" style="width: 250px;"  placeholder="Select Product" autofocus="" style="height: 35px;">
+							<option value="">Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+						<input name="submit" type="submit" id="submit" value="Add" style="width:100px; padding: 4px 38px;" class="btn-sub" />
+					</div>
+					<input type="hidden" name="act" value="save_passengar">
+					<input type="hidden" name="booking_id" value="{{booking_id}}">
+					<input type="hidden" name="route_id" value="{{route_id}}">
+				</form>
+				<div class="header_02" style="border-bottom:1px solid; margin-top: 20px;">All Added Passengar</div>
+				{% if messages %}
+					<div class="msg" style="margin:10px; color: #FF0000;">
+						{% for message in messages %}
+							<strong>{{ message }}</strong>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<form method="post" action="/book/payment">
+				{% csrf_token %}
+				<table class="table table-striped table-advance table-hover"  id="mydatatable" style="color:#000000">
+					<thead>
+						<tr style="background-color: #0f5ba7; color: #FFFFFF; font-size: 13px; font-weight: bold; height: 30px;">
+							<th style="text-align: center;">Sr. No</th>
+							<th>Name</th>
+							<th>Age</th>
+							<th>Gender</th>
+							<th>Fare</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for items in passengars %}
+						<tr>
+							<td style="text-align:center; font-weight:bold;">{{ forloop.counter }}</td>
+							<td>{{items.passengar_name}}</td>
+							<td>{{items.passengar_age}}</td>
+							<td>{{items.passengar_gender}}</td>
+							<td>{{airlines_details.route_fare}}</td>
+							<td style="text-align:center"><a href="delete/items/{{items.passengar_id}}" style="color:#FF0000; font-weight:bold; text-decoration: underline;">Delete</a></td>
+						</tr>
+					{% endfor %}
+						<tr style="background-color: #0f5ba7; color: #FFFFFF; font-size: 13px; font-weight: bold; height: 30px;">
+							<td colspan="4" style="text-align: right;">Total Fare :</td>
+							<td colspan="2" style="text-align: left;">{{total_fare}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="text-align: right; margin-top: 10px ;">
+					<input name="submit" type="submit" id="submit" value="Book Ticket" style="width:200px;" class="btn-sub"/>
+				</div>
+				
+				<input type="hidden" name="act" value="save_order">
+				<input type="hidden" name="total_fare" value="{{total_fare}}">
+				</form>
+			</div>
+			<div class="cleaner"></div>
+		</div> <!-- end of content wrapper -->
+		<div class="cleaner"></div>
+	</div> <!-- end of content wrapper -->
+	<div class="cleaner"></div>
+	</div>
+{% endblock content %}

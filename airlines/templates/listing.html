@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	function delete_record(id) {
+		if (confirm("Do you want to delete the record ?")) {
+			location.href = "/airline/delete/" + id;
+		}
+	}
+	jQuery(document).ready(function() {
+		jQuery('#mydatatable').DataTable();
+	});
+</script>
+<div id="templatemo_content_wrapper">
+	<div id="templatemo_content">
+		<div id="column_w530" style="text-align:justify; width:100%;">
+			<div class="header_02" style="border-bottom:1px solid">All Available Airlines</div>
+			{% if messages %}
+			<div class="alert alert-success fade in" style="margin:10px;">
+				{% for message in messages %}
+				<strong>{{ message }}</strong> {% endfor %}
+			</div>
+			{% endif %}
+			<div class="col-lg-12">
+					<section class="panel">
+								{% for airline in airlineslist %}
+								<form name="frm" action="/book/add" method="post">
+								{% csrf_token %}
+								<div class="column_w300_section_01">
+										<div class="news_image_wrapper">
+											<a href="/airline/details/{{airline.airline_id}}">
+												<img src="{{airline.company_image}}" alt="image" style="height:70px; width:70px;" />
+											</a>
+										</div>
+										
+										<div class="news_content" style="margin-left:10px; float:left; width:585px">
+											<table style="border-bottom: 2px solid #CCCCCC;">
+												<tr>
+													<td style="width: 70%;">
+														<div class="header_04"><a href="#">{{airline.airlines_name}} - {{airline.company_name}}</a></div>
+														<p><b>Airline Number : {{airline.airlines_no}}</b> 
+															<br>From City : {{airline.city_name}}
+															<br>Fare : {{airline.route_fare}}
+														</p>			
+													</td>
+													<td style="width: 30%;">
+														<input type="submit" value="Book Now" class="btn-sub" style="padding: 6px 30px">
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div class="cleaner"></div>
+									</div>
+									<input type="hidden" name="act" value="start_booking">
+									<input type="hidden" name="route_id" value="{{airline.route_id}}">
+									<input type="hidden" name="date" value="{{date}}">
+								</form>
+								{% endfor %}
+					</section>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+		<div class="cleaner"></div>
+	</div>
+	<div class="cleaner"></div>
+</div>
+{% endblock content %}

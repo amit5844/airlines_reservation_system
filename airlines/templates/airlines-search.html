@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+  $( function() {
+    $( "#travel_date" ).datepicker();
+  } );
+  </script>
+<div id="templatemo_content_wrapper">
+	<div id="templatemo_content">
+		<div id="column_w530" style="text-align:justify; width:100%;">
+			<div class="header_02" style="border-bottom:1px solid">Search Airlines</div>
+            <form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			
+				<div class="row">
+					<label for="name">From City</label></br>
+					<select name="from_city" required class="form-control" placeholder="From City" autofocus=""> 
+					<option value="">Please Select</option>
+					{% for city in citylist %}
+					<option value="{{ city.city_id }}" {% ifequal city.city_id airlinesdetails.airlines_source_station %} selected="selected"{% endifequal %}>{{city.city_name}}</option>
+					{% endfor %}
+					</select></br>
+				</div>
+				<div class="row">
+					<label for="name">To City</label></br>
+					<select name="to_city" required class="form-control" placeholder="Destination Station" autofocus=""> 
+					<option value="">Please Select</option>
+					{% for city in citylist %}
+					<option value="{{ city.city_id }}"{% ifequal city.city_id airlinesdetails.airlines_destination_station %} selected="selected"{% endifequal %}>{{city.city_name}}</option>
+					{% endfor %}
+					</select></br>
+				</div>
+				<div class="row">
+					<label for="name">Travel Date</label></br>
+					<input type="text" placeholder="Travel Date" id="travel_date" name="travel_date"></br>
+				</div>
+				<div class="clear" style="padding: 10px;"></div>
+				<button class="btn-sub" type="submit">Search</button>
+				<button class="btn-sub" type="reset">Reset</button>
+
+			<input type="hidden" name="act" value="save_airlines">
+		</form>			
+        </div>
+    	<div class="cleaner"></div>
+	</div> <!-- end of content wrapper -->
+	<div class="cleaner"></div>
+</div> <!-- end of content wrapper -->
+<div class="cleaner"></div>
+</div>
+{% endblock content %}

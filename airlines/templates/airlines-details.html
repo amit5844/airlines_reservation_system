@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+<div id="templatemo_content_wrapper">
+	<div id="templatemo_content">
+		<div id="column_w530" style="text-align:justify; width:100%;">
+			<div class="header_02" style="border-bottom:1px solid">Payment Details</div>
+			<div class="header_02" style="border-bottom:1px solid">Airlines Details</div>
+            <form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+				<table>
+					<tr>
+						<th style="width:30%"><img src="{{airline.company_image}}" alt="image" style="height:70px; width:70px;" /></th>
+						<td style="width:70%">
+							<div class="header_04"><a href="#">{{airline.airlines_name}} - {{airline.company_name}}</a></div>
+							<p><b>Airline Number : {{airline.airlines_no}}</b> 
+								<br>From City : {{airline.city_name}}
+								<br>Fare : {{airline.route_fare}}
+							</p>	
+						</td>
+					</tr>
+				</table>
+			</form>
+			<div class="header_02" style="border-bottom:1px solid">Booking Details</div>
+
+        </div>
+    	<div class="cleaner"></div>
+	</div> <!-- end of content wrapper -->
+	<div class="cleaner"></div>
+</div> <!-- end of content wrapper -->
+<div class="cleaner"></div>
+</div>
+{% endblock content %}

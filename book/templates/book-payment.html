@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+  $( function() {
+    $( "#product_dob" ).datepicker();
+  } );
+  </script>
+<div id="templatemo_content_wrapper">
+		<div id="templatemo_content">
+			<div id="column_w530" style="text-align:justify; width:100%;">
+				<div class="header_02" style="border-bottom:1px solid">Make Payment - Enter Your Card Details</div>
+				<img src="/assets/images/card.jpg" alt="image 1" style="width:480px;margin-bottom: 10px;">
+				<form method="post" action="/book/ticket">
+					{% csrf_token %}
+					<input type="hidden" name="act" value="">
+						<div style="margin-bottom:15px;">
+						<input required type="text" name="passengar_name" id="passengar_name" style="width: 300px; margin-bottom : 10px;"  class="form-control" placeholder="Credit Card No"> <br>
+						<input required type="text" name="passengar_name" id="passengar_name" style="width: 300px; margin-bottom : 10px;"  class="form-control" placeholder="Your Full Name"> <br>
+						<input required type="password" maxlength="4" name="passengar_name" id="passengar_name" style="width: 300px; margin-bottom : 10px;"  class="form-control" placeholder="CVV Number"> <br>
+						<select name="passengar_gender" required class="form-control" style="width: 150px; height:35px"  placeholder="Select Product" autofocus="" style="height: 35px;">
+							<option value="">Expiry Month</option>
+							<option value="Male">January</option>
+							<option value="Male">February</option>
+							<option value="Male">March</option>
+							<option value="Male">April</option>
+							<option value="Male">May</option>
+							<option value="Male">June</option>
+							<option value="Male">July</option>
+							<option value="Male">August</option>
+							<option value="Male">September</option>
+							<option value="Male">October</option>
+							<option value="Male">November</option>
+							<option value="Male">December</option>
+						</select>
+						<select name="passengar_gender" required class="form-control" style="width: 150px; height:35px"  placeholder="Select Product" autofocus="" style="height: 35px;">
+							<option value="">Expiry Year</option>
+							<option value="Male">2019</option>
+							<option value="Male">2020</option>
+							<option value="Male">2021</option>
+							<option value="Male">2022</option>
+							<option value="Male">2023</option>
+							<option value="Male">2024</option>
+							<option value="Male">2025</option>
+						</select><br><br>
+						<div style="color: #FF0000; font-size: 21px; font-weight: bold; padding: 13px;">
+							Total Amount to Pay : {{total_fare}}.00/-
+						</div>
+						<input name="submit" type="submit" id="submit" value="Make Payment" class="btn-sub" />
+					</div>
+					<input type="hidden" name="act" value="save_passengar">
+					<input type="hidden" name="booking_id" value="{{booking_id}}">
+					<input type="hidden" name="total_fare" value="{{total_fare}}">
+					<input type="hidden" name="route_id" value="{{route_id}}">
+				</form>
+			
+			<div class="cleaner"></div>
+		</div> <!-- end of content wrapper -->
+		<div class="cleaner"></div>
+	</div> <!-- end of content wrapper -->
+	<div class="cleaner"></div>
+	</div>
+{% endblock content %}

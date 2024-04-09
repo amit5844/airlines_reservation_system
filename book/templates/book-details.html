@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+  $( function() {
+    $( "#product_dob" ).datepicker();
+  } );
+  </script>
+  <style>
+	th, td {
+	  border-bottom: 1px solid #ddd;
+	  padding: 5px;
+	}
+	</style>
+<div id="templatemo_content_wrapper">
+		<div id="templatemo_content">
+			<div id="column_w530" style="text-align:justify; width:100%;">
+				<div class="header_02" style="border-bottom:1px solid">Your Booking Details - Booking ID ({{booking_details.booking_id}})</div>
+				<table>
+					<tr>
+						<td style="width: 15%"><img src="{{airlines_details.company_image}}" alt="image" style="height:100px; width:100px;" /></td>
+						<td style="width: 85%">
+							<div class="header_04"><a href="#">{{airlines_details.airlines_name}} - {{airlines_details.company_name}}</a></div>
+							<p><b>Airline Number : {{airlines_details.airlines_no}}</b> 
+								<br>From City : {{airlines_details.city_name}}
+								<br>Fare : {{booking_details.booking_total}}
+								<br>Travel Date : {{booking_details.booking_journey_date}}
+							</p>	
+						</td>
+					</tr>
+				</table>
+				<div class="header_02" style="border-bottom:1px solid; margin-top: 20px;">All Passengar Details</div>
+				{% if messages %}
+					<div class="msg" style="margin:10px; color: #FF0000;">
+						{% for message in messages %}
+							<strong>{{ message }}</strong>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<form method="post" action="/book/payment">
+				{% csrf_token %}
+				<table style="width: 100%;">
+					<thead>
+						<tr style="background-color: #0f5ba7; color: #FFFFFF; font-size: 13px; font-weight: bold; height: 30px;">
+							<th>Sr. No</th>
+							<th>Name</th>
+							<th>Age</th>
+							<th>Gender</th>
+							<th>Fare</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for items in passengars %}
+						<tr>
+							<td style="text-align:center; font-weight:bold;">{{ forloop.counter }}</td>
+							<td>{{items.passengar_name}}</td>
+							<td>{{items.passengar_age}}</td>
+							<td>{{items.passengar_gender}}</td>
+							<td>{{airlines_details.route_fare}}</td>
+						</tr>
+					{% endfor %}
+					<tr style="background-color: #0f5ba7; color: #FFFFFF; font-size: 13px; font-weight: bold; height: 30px;">
+						<td colspan="4" style="text-align: right;">Total Fare :</td>
+						<td style="text-align: left;">{{booking_details.booking_total}}.00/-</td>
+					</tr>
+					</tbody>
+				</table>
+				<div style="text-align: right; margin-top: 10px ;">
+					<input name="submit" type="button" id="submit" value="Print Ticket" style="width:200px;" class="btn-sub" onclick="window.print()"/>
+				</div>
+				<input type="hidden" name="act" value="save_order">
+				</form>
+			</div>
+			<div class="cleaner"></div>
+		</div> <!-- end of content wrapper -->
+		<div class="cleaner"></div>
+	</div> <!-- end of content wrapper -->
+	<div class="cleaner"></div>
+	</div>
+{% endblock content %}
